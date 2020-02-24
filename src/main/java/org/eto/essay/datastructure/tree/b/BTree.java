@@ -292,7 +292,8 @@ public class BTree<E extends Comparable<? super E>> implements Tree<E> {
 			fixAdd(parent, ht + 1);
 		}else{
 			//root = node 
-			//上面left和right重新创建而没有用分裂就是为了这里可以直接对root进行修改，这样方便子类复用
+			//上面left和right重新创建而没有用分裂, 
+			//就是为了这里可以直接对root进行修改，这样方便子类复用
 			height++;
 			initEntrys(node, m); 
 			node.entrys[0] = middle;
@@ -348,7 +349,8 @@ public class BTree<E extends Comparable<? super E>> implements Tree<E> {
 
 			//在middleIndex处创建一个Entry, 并建立相互关联
 			Entry<E> brotherMinEntry = brother.entrys[0];
-			Entry<E> middle = new Entry<>(parentEntry.element, middleIndex, node, oldRight, brotherMinEntry.leftNode); 
+			Entry<E> middle = new Entry<>(parentEntry.element, 
+					middleIndex, node, oldRight, brotherMinEntry.leftNode); 
 			entrys[middleIndex] = middle;
 			if(oldRight != null){ //同一层的节点必然同时存在
 				oldRight.rightEntry = middle;
@@ -384,7 +386,8 @@ public class BTree<E extends Comparable<? super E>> implements Tree<E> {
 			Entry<E> brotherMaxEntry = getMaxEntry(brother);
 			if(brother.entrys[middleIndex + 1] != null){ 
 				System.arraycopy(entrys, 0, entrys, 1, middleIndex + 1);
-				Entry<E> first = new Entry<>(parentEntry.element, 0, node, brotherMaxEntry.rightNode, oldLeft);
+				Entry<E> first = new Entry<>(parentEntry.element, 
+						0, node, brotherMaxEntry.rightNode, oldLeft);
 				entrys[0] = first;
 				if(oldLeft != null){
 					oldLeft.leftEntry = first; 
@@ -395,7 +398,8 @@ public class BTree<E extends Comparable<? super E>> implements Tree<E> {
 				parentEntry.element = brotherMaxEntry.element;
 				fixIndex(0, node);
 			}else{
-				Entry<E> last = new Entry<>(parentEntry.element, middleIndex + 1, brother, brotherMaxEntry.rightNode, oldLeft);
+				Entry<E> last = new Entry<>(parentEntry.element, 
+						middleIndex + 1, brother, brotherMaxEntry.rightNode, oldLeft);
 				if(oldLeft != null){
 					brotherMaxEntry.rightNode.rightEntry = last;
 					oldLeft.leftEntry = last;
