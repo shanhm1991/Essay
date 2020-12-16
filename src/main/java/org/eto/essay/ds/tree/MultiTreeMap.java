@@ -1,4 +1,4 @@
-package org.eto.essay.datastructure.tree;
+package org.eto.essay.ds.tree;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.eto.essay.datastructure.tree.b;
+package org.eto.essay.ds.tree.b;
 
 import java.util.List;
 

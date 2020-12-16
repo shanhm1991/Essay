@@ -1,4 +1,4 @@
-package org.eto.essay.datastructure;
+package org.eto.essay.ds;
 
 import java.util.Arrays;
 import java.util.Collection;
