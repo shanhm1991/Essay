@@ -15,7 +15,7 @@ import java.util.Set;
  *
  * @param <E>
  */
-public class BinarySearchTreeSet<E extends Comparable<? super E>> implements Set<E> {
+public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 
 	private Node<E> root;
 
@@ -91,6 +91,7 @@ public class BinarySearchTreeSet<E extends Comparable<? super E>> implements Set
 		if(isEmptyNode(node)){
 			return false;
 		}
+		
 		int compare = e.compareTo(node.element);
 		if(compare < 0){
 			return contains(e, node.left);
