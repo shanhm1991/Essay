@@ -6,7 +6,7 @@ package org.eto.essay.ds.tree;
  *
  * @param <E>
  */
-public class AvlTreeSet<E extends Comparable<? super E>> extends BinarySearchTreeSet<E> {
+public class AvlTreeSet<E extends Comparable<? super E>> extends BinaryTreeSet<E> {
 
 	private static final int ALLOWED_IMBALANCE = 1;
 

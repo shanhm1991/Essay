@@ -7,7 +7,7 @@ package org.eto.essay.ds.tree;
  * @param <K>
  * @param <V>
  */
-public class MultiRBTreeMap<K extends Comparable<? super K>, V> extends MultiBinarySearchTreeMap<K, V> {
+public class MultiRBTreeMap<K extends Comparable<? super K>, V> extends MultiBinaryTreeMap<K, V> {
 	
 	public MultiRBTreeMap() {
 		

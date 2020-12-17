@@ -18,7 +18,7 @@ import java.util.Set;
  * @param <K>
  * @param <V>
  */
-public class MultiBinarySearchTreeMap<K extends Comparable<? super K>, V> implements MultiTreeMap<K, V> {
+public class MultiBinaryTreeMap<K extends Comparable<? super K>, V> implements MultiTreeMap<K, V> {
 
 	protected Node<K, V> header;
 
@@ -30,11 +30,11 @@ public class MultiBinarySearchTreeMap<K extends Comparable<? super K>, V> implem
 
 	protected final boolean asc;
 
-	public MultiBinarySearchTreeMap(){
+	public MultiBinaryTreeMap(){
 		this(true, true);
 	}
 
-	public MultiBinarySearchTreeMap(boolean deduplication, boolean asc){
+	public MultiBinaryTreeMap(boolean deduplication, boolean asc){
 		this.deduplication = deduplication;
 		this.asc = asc;
 		init();
@@ -719,7 +719,7 @@ public class MultiBinarySearchTreeMap<K extends Comparable<? super K>, V> implem
 			}
 			linkOut(current);
 			if(!current.isRepeat){
-				MultiBinarySearchTreeMap.this.remove(current);
+				MultiBinaryTreeMap.this.remove(current);
 			}
 			initSize = size;
 		}
@@ -783,7 +783,7 @@ public class MultiBinarySearchTreeMap<K extends Comparable<? super K>, V> implem
 			}
 			linkOut(current);
 			if(!current.isRepeat){
-				MultiBinarySearchTreeMap.this.remove(current);
+				MultiBinaryTreeMap.this.remove(current);
 			}
 			initSize = size;
 		}
@@ -845,7 +845,7 @@ public class MultiBinarySearchTreeMap<K extends Comparable<? super K>, V> implem
 			}
 			linkOut(current);
 			if(!current.isRepeat){
-				MultiBinarySearchTreeMap.this.remove(current);
+				MultiBinaryTreeMap.this.remove(current);
 			}
 			initSize = size;
 		}

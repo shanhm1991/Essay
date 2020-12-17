@@ -104,7 +104,7 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 
 	@Override
 	public boolean add(E e){
-		root = add(e, root);
+		root = add(e, getRoot());
 		return true;
 	}
 
@@ -113,6 +113,7 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 			size++;
 			return new Node<>(e);
 		}
+		
 		int compare = e.compareTo(node.element);
 		if(compare < 0){
 			node.left = add(e, node.left);
@@ -135,16 +136,16 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 		if(isEmptyNode(node)){
 			return node;
 		}
+		
 		int compare = e.compareTo(node.element);
 		if(compare < 0){
 			node.left = remove(e, node.left);
 		}else if(compare > 0){
 			node.right = remove(e, node.right);
-		}else if(node.left != null && node.right != null){
-			//可以通过随机调用removeRigthMin或removeLeftMax以尽量保持二叉树的平衡
-			node = removeLeftMax(node);
+		}else if(node.left != null && node.right != null){  //情形3
+			node = removeLeftMax(node); //or node = removeRigthMin(node);
 			size--;
-		}else{
+		}else{  //情形1或2
 			node = (node.left != null) ? node.left : node.right;
 			size--;
 		}
@@ -152,14 +153,14 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 	}
 	
 	protected Node<E> removeLeftMax(Node<E> node){
-		if(node.left.right == null){
-			//max = node.left
+		if(node.left.right == null){  //leftMax = node.left
 			Node<E> right = node.right;
 			node = node.left;
 			node.right = right;
 		}else{
 			Node<E> right = node.right;
 			Node<E> left = node.left;
+			
 			node = removeMax(node.left);
 			node.right = right;
 			node.left = left;
@@ -177,8 +178,7 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 	}
 
 	protected Node<E> removeRigthMin(Node<E> node){
-		if(node.right.left == null){
-			//min = node.right
+		if(node.right.left == null){ //rightMin = node.right
 			Node<E> left = node.left;
 			node = node.right;
 			node.left = left;
@@ -190,6 +190,15 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 			node.left = left;
 		}
 		return node;
+	}
+	
+	private Node<E> removeMin(Node<E> node){ 
+		if(node.left != null && node.left.left == null){
+			Node<E> min = node.left;
+			node.left = min.right;
+			return min;
+		}
+		return removeMin(node.left);
 	}
 	
 	@Override
@@ -208,13 +217,15 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 		return true;
 	}
 
-	private Node<E> removeMin(Node<E> node){ 
-		if(node.left != null && node.left.left == null){
-			Node<E> min = node.left;
-			node.left = min.right;
-			return min;
-		}
-		return removeMin(node.left);
+	@Override
+	public Iterator<E> iterator() {
+		return toList().iterator();
+	}
+	
+	public List<E> toList() {
+		List<E> list = new ArrayList<>(size);
+		link(getRoot(), list);
+		return list;
 	}
 	
 	private void link(Node<E> node, List<E> list){
@@ -226,23 +237,12 @@ public class BinaryTreeSet<E extends Comparable<? super E>> implements Set<E> {
 		link(node.right, list);
 	}
 	
-	public List<E> toList() {
-		List<E> list = new ArrayList<>(size);
-		link(getRoot(), list);
-		return list;
-	}
-	
-	@Override
-	public Iterator<E> iterator() {
-		return toList().iterator();
-	}
-	
 	@Override
 	public String toString() {
 		return toList().toString();
 	}
 	
-	public void printTree() {
+	public void print() {
 		Map<Integer, List<Node<E>>> map = new LinkedHashMap<>();
 		build(getRoot(), map, 0);
 		for(List<Node<E>> list : map.values()){

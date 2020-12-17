@@ -6,7 +6,7 @@ package org.eto.essay.ds.tree;
  *
  * @param <E>
  */
-public class RBTreeSet<E extends Comparable<? super E>> extends BinarySearchTreeSet<E> {
+public class RBTreeSet<E extends Comparable<? super E>> extends BinaryTreeSet<E> {
 
 	private RBNode<E> header;
 
